@@ -2,35 +2,46 @@
 <html>
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+    <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+      <div class="photograph-header"></div>
+      <section class="photograph-media">
+        <div class="photograph-media__sort">
+          <p>Trier par</p>
+          <div class=" photograph-media__sort--filterTriple">
+            <p>Popularité</p>
+            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down">
+          </div>
+        </div>
+        <div class="photograph-media__articles"></div>
+      </section>
     </main>
     <div id="contact_modal">
-			<div class="modal">
-				<header>
+      <div class="modal">
+        <header>
           <h2>Contactez-moi</h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
+        <form>
+          <div>
+            <label>Prénom</label>
+            <input />
+          </div>
           <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/utils/contactForm.js"></script>
+        </form>
+      </div>
+    </div>
+    <script src="scripts/factories/photographerFactory.js"></script>
+    <script src="scripts/pages/photographer.js"></script>
+    <!--     <script src="/scripts/utils/contactForm.js"></script>
+ -->
   </body>
 </html>
