@@ -22,7 +22,7 @@ async function displayData(photographers) {
     photographersSection.appendChild(userCardDOM);
 
     userCardDOM.addEventListener("click", function () {
-      let url = new URL(window.location + "photographer.html?id=" + photographerModel.id);
+      let url = new URL("http://127.0.0.1:5500/photographer.html?id=" + photographerModel.id);
 
       window.location = url;
     });

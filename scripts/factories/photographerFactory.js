@@ -74,17 +74,22 @@ function photographerFactory(data, type) {
 
 function mediaFactory(data, type) {
   // Déconstruciton des données ???
-  const { photographerId, title, image, video, likes, date, price } = data;
+  const { id, photographerId, title, image, video, likes, date, price } = data;
 
   const picture = `assets/images/Sample Photos/${image}`;
-  const videoSample = `assets/images/Sample Photos/${video}`;
+  const videoSample = `./assets/images/Sample Photos/${video}`;
   //fonction de création de l'article card
 
   function getUserImageDOM() {
     const article = document.createElement("article");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
+    img.setAttribute("data-id", id);
+    img.setAttribute("data-title", title);
+
+
     img.classList.add("media-img");
+    img.setAttribute("onclick", "displayLightbox()");
 
     const textMedia = document.createElement("div");
 
@@ -99,6 +104,7 @@ function mediaFactory(data, type) {
     const heart = document.createElement("img");
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
+    heart.setAttribute("onclick", "addLike()");
 
     article.appendChild(img);
     article.appendChild(textMedia);
@@ -112,8 +118,16 @@ function mediaFactory(data, type) {
   function getUserVideoDOM() {
     const article = document.createElement("article");
     const videoTest = document.createElement("video");
-    videoTest.setAttribute("src", videoSample);
+    videoTest.setAttribute("data-id", id);
+    videoTest.setAttribute("data-title", title);
+
+    videoTest.setAttribute("controls", "controls");
+
+    const source = document.createElement("source")
+    source.setAttribute("src", videoSample);
+    source.setAttribute("type", "video/mp4");
     videoTest.classList.add("media-video");
+    videoTest.setAttribute("onclick", "displayLightbox()");
 
     const textMedia = document.createElement("div");
 
@@ -127,8 +141,10 @@ function mediaFactory(data, type) {
     const heart = document.createElement("img");
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
+    heart.setAttribute("onclick", "addLike()");
 
     article.appendChild(videoTest);
+    videoTest.appendChild(source);
     article.appendChild(textMedia);
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);
@@ -137,8 +153,8 @@ function mediaFactory(data, type) {
   }
 
   if (type === "image") {
-    return { photographerId, picture, getUserImageDOM };
+    return { id, photographerId, picture, getUserImageDOM };
   } else if (type === "video") {
-    return { photographerId, picture, getUserVideoDOM };
+    return { id, photographerId, picture, getUserVideoDOM };
   }
 }

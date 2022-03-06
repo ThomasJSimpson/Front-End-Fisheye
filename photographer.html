@@ -16,32 +16,59 @@
       <section class="photograph-media">
         <div class="photograph-media__sort">
           <p>Trier par</p>
-          <div class=" photograph-media__sort--filterTriple">
+          <div class="photograph-media__sort--filterSimple likes">
             <p>Popularité</p>
-            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down">
+            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+          </div>
+          <div class="photograph-media__sort--filterSimple date">
+            <p>Date</p>
+            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+          </div>
+          <div class="photograph-media__sort--filterSimple title">
+            <p>Titre</p>
+            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
           </div>
         </div>
         <div class="photograph-media__articles"></div>
       </section>
+      <div id="likesTotal"></div>
     </main>
     <div id="contact_modal">
       <div class="modal">
-        <header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-        <form>
+        <header id="contactName"></header>
+        <form name="form" method="get" style="display: block">
           <div>
-            <label>Prénom</label>
-            <input />
+            <label for="first">Prénom</label>
+            <input id="first" />
           </div>
-          <button class="contact_button">Envoyer</button>
+          <div>
+            <label for="last">Nom</label>
+            <input id="last" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" />
+          </div>
+          <div>
+            <label for="inputMessage">Votre message</label>
+            <input id="inputMessage" />
+          </div>
+          <button class="contact_button send_button">Envoyer</button>
         </form>
       </div>
     </div>
+    <div class="lightbox">
+      <button class="lightbox__close">Fermer</button>
+      <button class="lightbox__next">Suivant</button>
+      <button class="lightbox__prev">Précédent</button>
+      <div class="lightbox__container">
+        
+      </div>
+      <p class="lightbox__title">Titre</p>
+    </div>
     <script src="scripts/factories/photographerFactory.js"></script>
     <script src="scripts/pages/photographer.js"></script>
-    <!--     <script src="/scripts/utils/contactForm.js"></script>
- -->
+    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/utils/lightbox.js" defer></script>
   </body>
 </html>

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
 }
 
 html {
@@ -15,6 +16,7 @@ html {
 body {
   font-family: "DM Sans", sans-serif;
   /* max-width: 1440px; */
+  height: 100vh;
 }
 
 header {
@@ -39,8 +41,9 @@ h1 {
 .logo {
   height: 50px;
   margin-top: 43px;
-
   margin-left: 100px;
+  cursor: pointer;
+
 }
 
 .photographer_section {
