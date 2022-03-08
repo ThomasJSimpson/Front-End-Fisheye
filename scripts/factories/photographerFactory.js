@@ -73,11 +73,12 @@ function photographerFactory(data, type) {
 }
 
 function mediaFactory(data, type) {
-  // Déconstruciton des données ???
+
   const { id, photographerId, title, image, video, likes, date, price } = data;
 
   const picture = `assets/images/Sample Photos/${image}`;
-  const videoSample = `./assets/images/Sample Photos/${video}`;
+  const videoSample = `assets/images/Sample Photos/${video}`;
+
   //fonction de création de l'article card
 
   function getUserImageDOM() {
@@ -86,8 +87,7 @@ function mediaFactory(data, type) {
     img.setAttribute("src", picture);
     img.setAttribute("data-id", id);
     img.setAttribute("data-title", title);
-
-
+    img.setAttribute("alt", title);
     img.classList.add("media-img");
     img.setAttribute("onclick", "displayLightbox()");
 
@@ -105,6 +105,10 @@ function mediaFactory(data, type) {
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
     heart.setAttribute("onclick", "addLike()");
+    heart.setAttribute("aria-label", "Cliquer pour aimer la photo");
+    //heart.setAttribute("data-like", false);
+
+
 
     article.appendChild(img);
     article.appendChild(textMedia);
@@ -120,12 +124,12 @@ function mediaFactory(data, type) {
     const videoTest = document.createElement("video");
     videoTest.setAttribute("data-id", id);
     videoTest.setAttribute("data-title", title);
+    videoTest.setAttribute("alt", title);
+    videoTest.setAttribute("src", videoSample);
 
-    videoTest.setAttribute("controls", "controls");
+   
 
-    const source = document.createElement("source")
-    source.setAttribute("src", videoSample);
-    source.setAttribute("type", "video/mp4");
+    
     videoTest.classList.add("media-video");
     videoTest.setAttribute("onclick", "displayLightbox()");
 
@@ -142,9 +146,10 @@ function mediaFactory(data, type) {
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
     heart.setAttribute("onclick", "addLike()");
+    heart.setAttribute("aria-label", "Cliquer pour aimer la vidéo");
+
 
     article.appendChild(videoTest);
-    videoTest.appendChild(source);
     article.appendChild(textMedia);
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);

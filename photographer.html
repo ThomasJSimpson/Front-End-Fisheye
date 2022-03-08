@@ -30,6 +30,7 @@
           </div>
         </div>
         <div class="photograph-media__articles"></div>
+        <div class="likeSpace"></div>
       </section>
       <div id="likesTotal"></div>
     </main>
@@ -51,20 +52,26 @@
           </div>
           <div>
             <label for="inputMessage">Votre message</label>
-            <input id="inputMessage" />
+            
+            <textarea id="inputMessage" ></textarea>
           </div>
-          <button class="contact_button send_button">Envoyer</button>
+          <button class="contact_button send_button" aria-label="Confirmer l'envoi de mon message">Envoyer</button>
         </form>
       </div>
     </div>
+    
     <div class="lightbox">
-      <button class="lightbox__close">Fermer</button>
-      <button class="lightbox__next">Suivant</button>
-      <button class="lightbox__prev">Précédent</button>
-      <div class="lightbox__container">
-        
+      <div class="lightbox__elements">
+        <button class="lightbox__prev" aria-label="Afficher le média précédent">Précédent</button>
+        <div class="lightbox__container">
+          <div class="lightbox__container--media"></div>
+          <p class="lightbox__container--title"></p>
+        </div>
+        <div class="lightbox__buttons">
+          <button class="lightbox__close" aria-label="Fermer la fenêtre de navigation des médias">Fermer</button>
+          <button class="lightbox__next" aria-label="Afficher le média suivant">Suivant</button>
+        </div>
       </div>
-      <p class="lightbox__title">Titre</p>
     </div>
     <script src="scripts/factories/photographerFactory.js"></script>
     <script src="scripts/pages/photographer.js"></script>

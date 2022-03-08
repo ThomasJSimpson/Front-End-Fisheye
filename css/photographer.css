@@ -264,6 +264,11 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  transition: 0.2s;
+}
+.contact_button:hover {
+  color: #000000;
+  background-color: #db8876;
 }
 
 .modal {
@@ -335,6 +340,7 @@ form input {
   line-height: 47px;
   padding-left: 10px;
   color: #312e2e;
+  outline: none;
 }
 #email {
   margin-bottom: 10px;
@@ -343,8 +349,16 @@ form input {
   width: 599px;
   height: 170px;
   margin-top: 5px;
-  /*   vertical-align: top;
- */
+  resize: none;
+  border-radius: 5px;
+  outline: none;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 47px;
+  padding-left: 10px;
+  color: #312e2e;
 }
 
 .send_button {
@@ -360,70 +374,60 @@ form input {
   height: 100%;
   background-color: rgb(255, 255, 255, 1);
   z-index: -1;
-  /*   padding: 62px 195px 19px;
- */
-
-  overflow: auto;
+  justify-content: center;
+  align-items: center;
 }
-
+.lightbox__elements {
+  display: flex;
+  height: 943px;
+}
+.lightbox__buttons {
+  display: flex;
+  flex-direction: column;
+}
 .lightbox__next,
 .lightbox__prev {
   border: none;
-  background: url(/assets/images/arrow_lightbox.svg) center center / 29.64px 48px no-repeat;
+  background: url(/assets/images/arrow_lightbox.svg) center / 29.64px 48px no-repeat;
   width: 50px;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  /* margin-top: -14px;
- */
+  height: 50px;
   z-index: 4;
   text-indent: -30000px;
   cursor: pointer;
-  /* transition: 0.3s; */
 }
-
-/* .lightbox__next:hover,
-.lightbox__prev:hover{
-  opacity: 1;
-} */
 .lightbox__prev {
-  right: auto; /* pourquoi? */
-  left: 131px;
+  margin-right: 34.36px;
+  margin-top: 425px;
   transform: rotate(180deg);
 }
-
 .lightbox__next {
-  right: auto; /* pourquoi? */
-  right: 131px;
+  margin-left: 34.36px;
+  margin-top: 368px;
 }
-
 .lightbox__close {
-  position: fixed;
   text-indent: -30000px;
   border: none;
+  margin-top: 15px;
+  margin-left: 27px;
   width: 42px;
   height: 42px;
-  background: url('data:image/svg+xml;utf8,<svg width="42" height="42" viewBox="0 0 42 42"  xmlns="http://www.w3.org/2000/svg"><path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="black"/></svg>') center center / 42px 42px no-repeat;
-  top: 77px;
-  right: 126px;
+  background: url('data:image/svg+xml;utf8,<svg width="42" height="42" cx="50" cy="50" r="40"  fill = "rgb(145, 28, 28)" viewBox="0 0 42 42"  xmlns="http://www.w3.org/2000/svg"><path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z"  /></svg>') center / 42px 42px;
   z-index: 5;
   cursor: pointer;
 }
 
 .lightbox__container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 195px;
-  margin-right: 195px;
+  flex-direction: column;
   width: 1050px;
-  margin-top: 62px;
-  /*margin-bottom: 62px; */
+  justify-content: center;
+}
+.lightbox__container--media {
+  display: flex;
+  justify-content: center;
   height: 900px;
 }
-.lightbox__title {
-  margin-left: 195px;
+.lightbox__container--title {
   font-family: DM Sans;
   font-style: normal;
   font-weight: normal;
@@ -433,10 +437,21 @@ form input {
   color: #911c1c;
 }
 
-.lightbox__container img {
+.lightbox__container--media img {
   width: 100%;
   height: 100%;
   border-radius: 5px;
   object-fit: cover;
   object-position: 50% 35%;
+}
+
+.lightbox__container--media video {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.likeSpace {
+  width: 100%;
+  height: 60px;
 }
