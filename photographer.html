@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8" />
@@ -9,7 +9,8 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
+      
     </header>
     <main id="main">
       <div class="photograph-header"></div>
@@ -40,42 +41,43 @@
         <form name="form" method="get" style="display: block">
           <div>
             <label for="first">Prénom</label>
-            <input id="first" />
+            <input type="text" title="Prénom" id="first" />
           </div>
           <div>
             <label for="last">Nom</label>
-            <input id="last" />
+            <input type="text" title="Nom de famille" id="last" />
           </div>
           <div>
             <label for="email">Email</label>
-            <input id="email" />
+            <input type="email" title="Email" id="email" />
           </div>
           <div>
             <label for="inputMessage">Votre message</label>
             
-            <textarea id="inputMessage" ></textarea>
+            <textarea type="text" title="Message" id="inputMessage" ></textarea>
           </div>
-          <button class="contact_button send_button" aria-label="Confirmer l'envoi de mon message">Envoyer</button>
+          <button class="contact_button send_button" title="Confirmer l'envoi de mon message" aria-label="Envoyer, confirmer l'envoi de mon message">Envoyer</button>
         </form>
       </div>
     </div>
     
     <div class="lightbox">
       <div class="lightbox__elements">
-        <button class="lightbox__prev" aria-label="Afficher le média précédent">Précédent</button>
+        <button class="lightbox__prev" title="Afficher le média précédent" aria-label="Afficher le média précédent">Précédent</button>
         <div class="lightbox__container">
           <div class="lightbox__container--media"></div>
           <p class="lightbox__container--title"></p>
         </div>
         <div class="lightbox__buttons">
-          <button class="lightbox__close" aria-label="Fermer la fenêtre de navigation des médias">Fermer</button>
-          <button class="lightbox__next" aria-label="Afficher le média suivant">Suivant</button>
+          <button class="lightbox__close" title="Fermer la fenêtre de navigation des médias" aria-label="Fermer la fenêtre de navigation des médias">Fermer</button>
+          <button class="lightbox__next" title="Afficher le média suivant" aria-label="Afficher le média suivant">Suivant</button>
         </div>
       </div>
     </div>
     <script src="scripts/factories/photographerFactory.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
+    
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/utils/lightbox.js" defer></script>
+    <script src="/scripts/pages/photographer.js"></script>
   </body>
 </html>

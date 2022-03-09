@@ -11,9 +11,11 @@ async function getPhotographers() {
     photographers,
   };
 }
-
+// Récupère l'ID du photographe injecté dans l'URL
 const params = new URLSearchParams(window.location.search);
 const idPhotographer = params.get("id");
+
+
 // Afficher les données a l'écran à partir des données importées (photographers)
 async function displayData(photographers) {
   //section html regroupant les cards
@@ -179,16 +181,16 @@ function switchSort() {
 }
 
 //Retour Index
-function backIndex() {
+/* function backIndex() {
   const logo = document.querySelector(".logo");
 
   logo.addEventListener("click", function () {
     // A adapter
     let url = new URL("http://127.0.0.1:5500/index.html");
-
+// http://127.0.0.1:5500/index.html
     window.location = url;
   });
-}
+} */
 
 async function likesCounter() {
   let likes = [];
@@ -215,7 +217,7 @@ async function init() {
   displayMedia(photographers, "likes");
   likesCounter();
   switchSort();
-  backIndex();
+  /* backIndex(); */
 }
 
 init();

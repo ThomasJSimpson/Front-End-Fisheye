@@ -1,14 +1,22 @@
 //
 function photographerFactory(data, type) {
-  // Déconstruciton des données ???
-
   const { name, id, portrait, city, country, tagline, price } = data;
   const picture = `assets/images/Sample Photos/Photographers ID Photos/${portrait}`;
   //fonction de création de l'article card
   function getUserCardDOM() {
+    const link = document.createElement("a");
+    const source = `photographer.html?id=${id}`
+    link.setAttribute("href", source);
+
     const article = document.createElement("article");
+    const figure = document.createElement("figure");
+    figure.setAttribute("role", "figure");
+
+
+    const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
+    img.setAttribute("alt", name);
     const h2 = document.createElement("h2");
     h2.textContent = name;
     const locationTxt = document.createElement("p");
@@ -21,19 +29,38 @@ function photographerFactory(data, type) {
     priceTxt.classList.add("price");
     priceTxt.textContent = `${price}€/jour`;
 
-    article.appendChild(img);
+    {
+      /* <figure role="group" aria-label="L’épopée d’une couleur, Maryla U. – Espace de couleur sRGB">
+    <img src="/paris-web-2017-epopee-couleur-espace-srgb.jpg" alt="L’épopée d’une couleur, Maryla U." width="720" height="322">
+    <figcaption>L’épopée d’une couleur, Maryla U. – Espace de couleur sRGB</figcaption>
+</figure> */
+    }
+    link.appendChild(article);
+
+    article.appendChild(figure);
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+
     article.appendChild(h2);
     article.appendChild(locationTxt);
     article.appendChild(taglineTxt);
     article.appendChild(priceTxt);
 
-    return article;
+    return link;
   }
 
   function getUserHeaderDOM() {
     const article = document.createElement("article");
+    const figure = document.createElement("figure");
+    figure.setAttribute("role", "figure");
+
+    figure.setAttribute("aria-label", name);
+
+    const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
+    img.setAttribute("alt", name);
+
     const textPhotograph = document.createElement("div");
     textPhotograph.classList.add("textPhotograph");
 
@@ -51,6 +78,10 @@ function photographerFactory(data, type) {
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.setAttribute("onclick", "displayModal()");
+    contactButton.setAttribute("title","Ouvrir la boite d'envoi de message" );
+    contactButton.setAttribute("aria-label","Contactez-moi, ouvrir la boite d'envoi de message" );
+
+
     contactButton.textContent = "Contactez-moi";
 
     article.appendChild(textPhotograph);
@@ -60,7 +91,9 @@ function photographerFactory(data, type) {
     article.appendChild(contactPhotograph);
 
     contactPhotograph.appendChild(contactButton);
-    contactPhotograph.appendChild(img);
+    contactPhotograph.appendChild(figure);
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
 
     return article;
   }
@@ -73,7 +106,6 @@ function photographerFactory(data, type) {
 }
 
 function mediaFactory(data, type) {
-
   const { id, photographerId, title, image, video, likes, date, price } = data;
 
   const picture = `assets/images/Sample Photos/${image}`;
@@ -83,6 +115,12 @@ function mediaFactory(data, type) {
 
   function getUserImageDOM() {
     const article = document.createElement("article");
+    const figure = document.createElement("figure");
+    figure.setAttribute("role", "figure");
+
+    figure.setAttribute("aria-label", title);
+
+    const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("data-id", id);
@@ -108,9 +146,10 @@ function mediaFactory(data, type) {
     heart.setAttribute("aria-label", "Cliquer pour aimer la photo");
     //heart.setAttribute("data-like", false);
 
+    article.appendChild(figure);
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
 
-
-    article.appendChild(img);
     article.appendChild(textMedia);
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);
@@ -121,15 +160,18 @@ function mediaFactory(data, type) {
 
   function getUserVideoDOM() {
     const article = document.createElement("article");
+    const figure = document.createElement("figure");
+    figure.setAttribute("role", "figure");
+
+    figure.setAttribute("aria-label", title);
+    const figcaption = document.createElement("figcaption");
+
     const videoTest = document.createElement("video");
     videoTest.setAttribute("data-id", id);
     videoTest.setAttribute("data-title", title);
     videoTest.setAttribute("alt", title);
     videoTest.setAttribute("src", videoSample);
 
-   
-
-    
     videoTest.classList.add("media-video");
     videoTest.setAttribute("onclick", "displayLightbox()");
 
@@ -148,9 +190,11 @@ function mediaFactory(data, type) {
     heart.setAttribute("onclick", "addLike()");
     heart.setAttribute("aria-label", "Cliquer pour aimer la vidéo");
 
-
-    article.appendChild(videoTest);
+    article.appendChild(figure);
+    figure.appendChild(videoTest);
+    figure.appendChild(figcaption);
     article.appendChild(textMedia);
+
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);
     textMedia.appendChild(heart);
