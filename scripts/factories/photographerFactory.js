@@ -5,13 +5,12 @@ function photographerFactory(data, type) {
   //fonction de création de l'article card
   function getUserCardDOM() {
     const link = document.createElement("a");
-    const source = `photographer.html?id=${id}`
+    const source = `photographer.html?id=${id}`;
     link.setAttribute("href", source);
 
     const article = document.createElement("article");
     const figure = document.createElement("figure");
     figure.setAttribute("role", "figure");
-
 
     const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
@@ -78,9 +77,8 @@ function photographerFactory(data, type) {
     const contactButton = document.createElement("button");
     contactButton.classList.add("contact_button");
     contactButton.setAttribute("onclick", "displayModal()");
-    contactButton.setAttribute("title","Ouvrir la boite d'envoi de message" );
-    contactButton.setAttribute("aria-label","Contactez-moi, ouvrir la boite d'envoi de message" );
-
+    contactButton.setAttribute("title", "Ouvrir la boite d'envoi de message");
+    contactButton.setAttribute("aria-label", "Contactez-moi, ouvrir la boite d'envoi de message");
 
     contactButton.textContent = "Contactez-moi";
 
