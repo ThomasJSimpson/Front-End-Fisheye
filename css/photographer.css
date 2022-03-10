@@ -394,11 +394,10 @@ form input {
 .lightbox__next,
 .lightbox__prev {
   border: none;
-  background: url("/assets/images/arrow_lightbox.svg") center / 29.64px 48px no-repeat;
+  background: url("../assets/images/arrow_lightbox.svg") center / 29.64px 48px no-repeat;
   width: 50px;
   height: 50px;
   z-index: 4;
-  text-indent: -30000px;
   cursor: pointer;
 }
 .lightbox__prev {
