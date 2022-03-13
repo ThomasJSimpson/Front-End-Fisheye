@@ -52,17 +52,13 @@ function photographerFactory(data, type) {
     const article = document.createElement("article");
     const figure = document.createElement("figure");
     figure.setAttribute("role", "figure");
-
     figure.setAttribute("aria-label", name);
-
     const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("alt", name);
-
     const textPhotograph = document.createElement("div");
     textPhotograph.classList.add("textPhotograph");
-
     const h1 = document.createElement("h1");
     h1.textContent = name;
     const locationTxt = document.createElement("p");
@@ -75,19 +71,17 @@ function photographerFactory(data, type) {
     contactPhotograph.classList.add("contactPhotograph");
 
     const contactButton = document.createElement("button");
+    contactButton.classList.add("button");
     contactButton.classList.add("contact_button");
     contactButton.setAttribute("onclick", "displayModal()");
     contactButton.setAttribute("title", "Ouvrir la boite d'envoi de message");
     contactButton.setAttribute("aria-label", "Contactez-moi, ouvrir la boite d'envoi de message");
-
     contactButton.textContent = "Contactez-moi";
-
     article.appendChild(textPhotograph);
     textPhotograph.appendChild(h1);
     textPhotograph.appendChild(locationTxt);
     textPhotograph.appendChild(taglineTxt);
     article.appendChild(contactPhotograph);
-
     contactPhotograph.appendChild(contactButton);
     contactPhotograph.appendChild(figure);
     figure.appendChild(img);
@@ -104,7 +98,7 @@ function photographerFactory(data, type) {
 }
 
 function mediaFactory(data, type) {
-  const { id, photographerId, title, image, video, likes, date, price } = data;
+  const { id, photographerId, title, image, video, likes } = data;
 
   const picture = `assets/images/Sample Photos/${image}`;
   const videoSample = `assets/images/Sample Photos/${video}`;
@@ -115,9 +109,7 @@ function mediaFactory(data, type) {
     const article = document.createElement("article");
     const figure = document.createElement("figure");
     figure.setAttribute("role", "figure");
-
     figure.setAttribute("aria-label", title);
-
     const figcaption = document.createElement("figcaption");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
@@ -126,28 +118,22 @@ function mediaFactory(data, type) {
     img.setAttribute("alt", title);
     img.classList.add("media-img");
     img.setAttribute("onclick", "displayLightbox()");
-
     const textMedia = document.createElement("div");
-
     const titleTxt = document.createElement("p");
     titleTxt.classList.add("titleTxt");
     titleTxt.textContent = `${title}`;
-
     const txtLikes = document.createElement("p");
     txtLikes.classList.add("txtLikes");
     txtLikes.textContent = `${likes}`;
-
     const heart = document.createElement("img");
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
     heart.setAttribute("onclick", "addLike()");
     heart.setAttribute("aria-label", "Cliquer pour aimer la photo");
     //heart.setAttribute("data-like", false);
-
     article.appendChild(figure);
     figure.appendChild(img);
     figure.appendChild(figcaption);
-
     article.appendChild(textMedia);
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);
@@ -160,25 +146,19 @@ function mediaFactory(data, type) {
     const article = document.createElement("article");
     const figure = document.createElement("figure");
     figure.setAttribute("role", "figure");
-
     figure.setAttribute("aria-label", title);
     const figcaption = document.createElement("figcaption");
-
     const videoTest = document.createElement("video");
     videoTest.setAttribute("data-id", id);
     videoTest.setAttribute("data-title", title);
     videoTest.setAttribute("alt", title);
     videoTest.setAttribute("src", videoSample);
-
     videoTest.classList.add("media-video");
     videoTest.setAttribute("onclick", "displayLightbox()");
-
     const textMedia = document.createElement("div");
-
     const titleTxt = document.createElement("p");
     titleTxt.classList.add("titleTxt");
     titleTxt.textContent = `${title}`;
-
     const txtLikes = document.createElement("p");
     txtLikes.classList.add("txtLikes");
     txtLikes.textContent = `${likes}`;
@@ -187,15 +167,14 @@ function mediaFactory(data, type) {
     heart.classList.add("heart");
     heart.setAttribute("onclick", "addLike()");
     heart.setAttribute("aria-label", "Cliquer pour aimer la vidéo");
-
     article.appendChild(figure);
     figure.appendChild(videoTest);
     figure.appendChild(figcaption);
     article.appendChild(textMedia);
-
     textMedia.appendChild(titleTxt);
     textMedia.appendChild(txtLikes);
     textMedia.appendChild(heart);
+
     return article;
   }
 

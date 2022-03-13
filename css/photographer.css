@@ -255,7 +255,7 @@
   cursor: pointer;
 }
 
-.contact_button {
+.button {
   font-size: 20px;
   font-weight: bold;
   color: white;
@@ -269,10 +269,12 @@
   cursor: pointer;
   transition: 0.2s;
 }
+
 .contact_button:hover {
   color: #000000;
   background-color: #db8876;
 }
+
 
 .modal {
   border-radius: 5px;
