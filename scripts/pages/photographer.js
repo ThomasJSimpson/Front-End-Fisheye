@@ -15,7 +15,6 @@ async function getPhotographers() {
 const params = new URLSearchParams(window.location.search);
 const idPhotographer = params.get("id");
 
-
 // Afficher les données a l'écran à partir des données importées (photographers)
 async function displayData(photographers) {
   //section html regroupant les cards
@@ -32,6 +31,7 @@ async function displayData(photographers) {
     }
   });
 }
+
 function sortMedias(medias, type) {
   if (type === "likes") {
     medias.sort(function (a, b) {
@@ -119,12 +119,9 @@ async function displayMedia(photographers, type) {
 
 // Tri ordre medias
 function switchSort() {
-  const switchSort = document.querySelector(".title");
-
-  switchSort.addEventListener("click", function () {
+  function titleSort() {
     const photographerMedia = document.querySelector(".photograph-media__articles");
     photographerMedia.innerHTML = "";
-    console.log(mediasToSort);
     mediasSorted = sortMedias(mediasToSort, "title");
     mediasSorted.forEach((media) => {
       if (!media.video) {
@@ -137,14 +134,11 @@ function switchSort() {
         photographerMedia.appendChild(userMediaDom);
       }
     });
-  });
+  }
 
-  const switchSort2 = document.querySelector(".likes");
-
-  switchSort2.addEventListener("click", function () {
+  function likesSort() {
     const photographerMedia = document.querySelector(".photograph-media__articles");
     photographerMedia.innerHTML = "";
-    console.log(mediasToSort);
     mediasSorted = sortMedias(mediasToSort, "likes");
     mediasSorted.forEach((media) => {
       if (!media.video) {
@@ -157,11 +151,9 @@ function switchSort() {
         photographerMedia.appendChild(userMediaDom);
       }
     });
-  });
+  }
 
-  const switchSort3 = document.querySelector(".date");
-
-  switchSort3.addEventListener("click", function () {
+  function dateSort() {
     const photographerMedia = document.querySelector(".photograph-media__articles");
     photographerMedia.innerHTML = "";
     console.log(mediasToSort);
@@ -177,7 +169,9 @@ function switchSort() {
         photographerMedia.appendChild(userMediaDom);
       }
     });
-  });
+  }
+
+  return { titleSort, likesSort, dateSort };
 }
 
 //Retour Index
@@ -210,16 +204,128 @@ function addLike() {
   }
 }
 
+function initSort() {
+  document.querySelector(".photograph-media__sort--filterSimple").addEventListener("click", function (e) {
+    if (e.target.firstElementChild.innerText === "Popularité") {
+      document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
+      document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
+      document.querySelector(".topSort").innerHTML = `<p>Popularité</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Date</p>`;
+      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
+
+      /* 
+  const topSort = document.createElement("div");
+  topSort.classList.add("topSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
+  document.querySelector(".topSort").innerHTML = `<p>Popularité</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+  const midSort = document.createElement("div");
+  midSort.classList.add("midSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
+  document.querySelector(".midSort").innerHTML = `<p>Date</p>`;
+  const lowSort = document.createElement("div");
+  lowSort.classList.add("lowSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
+  document.querySelector(".lowSort").innerHTML = `<p>Titre</p>`; */
+    } else if (e.target.firstElementChild.innerText === "Date") {
+      document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
+      document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
+      document.querySelector(".topSort").innerHTML = `<p>Date</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
+      /* document.querySelector(".photograph-media__sort--filterSimple").innerHTML = "";
+  document.querySelector(".photograph-media__sort--filterSimple").className = "photograph-media__sort--filterTriple";
+  const topSort = document.createElement("div");
+  topSort.classList.add("topSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
+  document.querySelector(".topSort").innerHTML = `<p>Date</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+  const midSort = document.createElement("div");
+  midSort.classList.add("midSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
+  document.querySelector(".midSort").innerHTML = `<p>Popularité</p>`;
+  const lowSort = document.createElement("div");
+  lowSort.classList.add("lowSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
+  document.querySelector(".lowSort").innerHTML = `<p>Titre</p>`; */
+    } else if (e.target.firstElementChild.innerText === "Titre") {
+      document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
+      document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
+      document.querySelector(".topSort").innerHTML = `<p>Titre</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Date</p>`;
+      /* document.querySelector(".photograph-media__sort--filterSimple").innerHTML = "";
+  document.querySelector(".photograph-media__sort--filterSimple").className = "photograph-media__sort--filterTriple";
+  const topSort = document.createElement("div");
+  topSort.classList.add("topSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
+  document.querySelector(".topSort").innerHTML = `<p>Titre</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
+  const midSort = document.createElement("div");
+  midSort.classList.add("midSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
+  document.querySelector(".midSort").innerHTML = `<p>Date</p>`;
+  const lowSort = document.createElement("div");
+  lowSort.classList.add("lowSort");
+  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
+  document.querySelector(".lowSort").innerHTML = `<p>Popularité</p>`; */
+    }
+    sortEL();
+  });
+}
+
 async function init() {
   // Récupère les datas des photographes
   const { photographers } = await getPhotographers();
   displayData(photographers);
   displayMedia(photographers, "likes");
   likesCounter();
-  switchSort();
-  /* backIndex(); */
+  initSort();
+  /* switchSort(); */
 }
 
 init();
 
 console.log();
+
+function sortEL() {
+  document.querySelector(".topSort").addEventListener("click", function (e) {
+    /* document.querySelector(".photograph-media__sort--filterTriple").classList.add("photograph-media__sort--filterSimple");
+  document.querySelector(".photograph-media__sort--filterTriple").classList.remove("photograph-media__sort--filteTriple");
+  document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `<p>Popularité</p>
+  <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />`;
+
+ */
+    document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
+    document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
+  });
+
+  document.querySelector(".midSort").addEventListener("click", function (e) {
+    console.log(e.target.firstElementChild.innerText);
+    if (e.target.firstElementChild.innerText === "Popularité") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      switchSort().likesSort();
+    } else if (e.target.firstElementChild.innerText === "Date") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
+      switchSort().dateSort();
+    } else if (e.target.firstElementChild.innerText === "Titre") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
+      switchSort().titleSort();
+    }
+    document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
+    document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
+  });
+
+  document.querySelector(".lowSort").addEventListener("click", function (e) {
+    console.log(e.target.firstElementChild.innerText);
+    if (e.target.firstElementChild.innerText === "Popularité") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      switchSort().likesSort();
+    } else if (e.target.firstElementChild.innerText === "Date") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
+      switchSort().dateSort();
+    } else if (e.target.firstElementChild.innerText === "Titre") {
+      document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
+      switchSort().titleSort();
+    }
+    document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
+    document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
+  });
+}

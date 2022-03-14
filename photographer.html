@@ -7,26 +7,28 @@
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
     <title>Fisheye - photographe</title>
   </head>
-  <body>
+  <body class="disable-select">
     <header>
-      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/></a>
+      <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" /></a>
     </header>
     <main id="main">
       <div class="photograph-header"></div>
       <section class="photograph-media">
-        <div class="photograph-media__sort">
+        <div class="photograph-media__sort disable-select">
           <p>Trier par</p>
-          <div class="photograph-media__sort--filterSimple likes">
+
+          <div class="photograph-media__sort--filterSimple">
             <p>Popularité</p>
             <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
           </div>
-          <div class="photograph-media__sort--filterSimple date">
-            <p>Date</p>
-            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
-          </div>
-          <div class="photograph-media__sort--filterSimple title">
-            <p>Titre</p>
-            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+
+          <div class="photograph-media__sort--filterTriple">
+            <div class="topSort">
+              <p></p>
+              <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+            </div>
+            <div class="midSort"><p></p></div>
+            <div class="lowSort"><p></p></div>
           </div>
         </div>
         <div class="photograph-media__articles"></div>
@@ -52,14 +54,14 @@
           </div>
           <div>
             <label for="inputMessage">Votre message</label>
-            
-            <textarea type="text" title="Message" id="inputMessage" ></textarea>
+
+            <textarea type="text" title="Message" id="inputMessage"></textarea>
           </div>
           <button class="button send_button" title="Confirmer l'envoi de mon message" aria-label="Envoyer, confirmer l'envoi de mon message">Envoyer</button>
         </form>
       </div>
     </div>
-    
+
     <div class="lightbox">
       <div class="lightbox__elements">
         <button class="lightbox__prev" title="Afficher le média précédent" aria-label="Afficher le média précédent"></button>
