@@ -193,14 +193,25 @@ async function likesCounter() {
   });
   likes = likes.reduce((acc, cur) => acc + cur, 0).toString();
 
-  document.querySelector("#likesTotal").innerHTML = ` <div class = "likesCounter" ><p id ="likes">${likes}</p> <img src="assets/images/heart_black.svg" alt=""></div> <p>${mediasSorted[0].price}€ / jour</p>`;
+  document.querySelector("#likesTotal").innerHTML = ` <div class = "likesCounter" ><p id ="likes">${likes}</p> <img  src="assets/images/heart_black.svg" alt=""></div> <p>${mediasSorted[0].price}€ / jour</p>`;
 }
+
 //Ajouter Likes
 function addLike() {
   if (event.target.getAttribute("data-like") != "true") {
     event.target.previousSibling.innerText = (Number(event.target.previousSibling.innerText) + 1).toString();
     document.querySelector("#likes").innerText = (Number(document.querySelector("#likes").innerText) + 1).toString();
     event.target.setAttribute("data-like", true);
+  }
+}
+
+function addLikeClick() {
+  addLike();
+}
+
+function addLikeKey() {
+  if (event.key === "Enter") {
+    addLike();
   }
 }
 
@@ -328,4 +339,14 @@ function sortEL() {
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
   });
+}
+
+// Execute a function when the user releases a key on the keyboard
+function enterTest() {
+  // Number 13 is the "Enter" key on the keyboard
+
+  // Cancel the default action, if needed
+
+  // Trigger the button element with a click
+  console.log("YESSS");
 }

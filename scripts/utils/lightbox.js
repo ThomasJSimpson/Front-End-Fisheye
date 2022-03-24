@@ -2,9 +2,19 @@ let idMediaLightbox;
 let indexMediaLightbox;
 
 function displayLightbox() {
+  console.log();
+
   document.querySelector(".lightbox").style.display = "flex";
   document.querySelector(".lightbox").style.zIndex = "3";
   document.querySelector("body").style.overflow = "hidden";
+  document.querySelector(".lightbox").setAttribute("aria-hidden", false);
+  document.getElementById("main").setAttribute("aria-hidden", true);
+
+  document.querySelector("header").setAttribute("aria-hidden", true);
+  document.querySelector("header").style.display = "none";
+
+  document.getElementById("main").style.display = "none";
+
   idMediaLightbox = event.target.getAttribute("data-id");
   mediasSorted.forEach((element) => {
     if (element.id.toString() === idMediaLightbox.toString()) {
@@ -20,6 +30,17 @@ function displayLightbox() {
       document.querySelector(".lightbox__container--title").innerHTML = `${event.target.getAttribute("data-title")}`;
     }
   });
+  document.querySelector(".lightbox__close").focus();
+}
+
+function displayLightboxClick() {
+  displayLightbox();
+}
+
+function displayLightboxKey() {
+  if (event.key === "Enter") {
+    displayLightbox();
+  }
 }
 
 function nextLightbox() {
@@ -99,6 +120,12 @@ function closeLightbox() {
   document.querySelector(".lightbox").style.display = "none";
   document.querySelector(".lightbox").style.zIndex = "-1";
   document.querySelector("body").style.overflow = "auto";
+  document.querySelector(".lightbox").setAttribute("aria-hidden", true);
+  document.getElementById("main").setAttribute("aria-hidden", false);
+  document.querySelector("header").setAttribute("aria-hidden", false);
+  document.querySelector("header").style.display = "block";
+
+  document.getElementById("main").style.display = "block";
 }
 
 document.querySelector(".lightbox__close").addEventListener("click", closeLightbox);
@@ -117,11 +144,15 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-
-
 /* 
 function escapeModal(e) {
   if (e.key === "Escape" && document.querySelector(".lightbox").style.display === "flex") {
     closeLightbox();
   }
 } */
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Tab" && document.querySelector(".lightbox").style.display === "flex" && document.activeElement.classList.contains("lightbox__next")) {
+    console.log(document.activeElement);
+    console.log(event.charCode);
+  }
+});
