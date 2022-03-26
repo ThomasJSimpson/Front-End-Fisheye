@@ -20,12 +20,6 @@ async function displayData(photographers) {
 
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
-
-    /* userCardDOM.addEventListener("click", function () {
-      let url = new URL("http://127.0.0.1:5500/photographer.html?id=" + photographerModel.id);
-// http://127.0.0.1:5500/index.html https://thomasjsimpson.github.io/Front-End-Fisheye/
-      window.location = url;
-    }); */
   });
 }
 

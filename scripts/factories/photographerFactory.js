@@ -4,7 +4,6 @@ function photographerFactory(data, type) {
   const picture = `assets/images/Sample Photos/Photographers ID Photos/${portrait}`;
   //fonction de création de l'article card
   function getUserCardDOM() {
-
     const link = document.createElement("a");
     const source = `photographer.html?id=${id}`;
     link.setAttribute("href", source);
@@ -181,6 +180,8 @@ function mediaFactory(data, type) {
     videoTest.setAttribute("onclick", "displayLightboxClick()");
     videoTest.setAttribute("tabindex", "2");
 
+    videoTest.setAttribute("onkeypress", "displayLightboxKey()");
+
     const textMedia = document.createElement("div");
     const titleTxt = document.createElement("p");
     titleTxt.classList.add("titleTxt");
@@ -193,10 +194,12 @@ function mediaFactory(data, type) {
     const heart = document.createElement("img");
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.setAttribute("tabindex", "2");
-
     heart.classList.add("heart");
-    heart.setAttribute("onclick", "addLike()");
-    heart.setAttribute("aria-label", "Cliquer pour aimer la vidéo");
+    heart.setAttribute("tabindex", "2");
+    heart.setAttribute("onclick", "addLikeClick()");
+    heart.setAttribute("onkeypress", "addLikeKey()");
+    heart.setAttribute("aria-label", "Likes");
+
     article.appendChild(figure);
     figure.appendChild(videoTest);
     figure.appendChild(figcaption);
