@@ -1,8 +1,6 @@
 async function getPhotographers() {
-  // Penser à remplacer par les données récupérées dans le json
-
+  // Récupere les données à partir du fichier JSON
   let photographers = await fetch("./data/photographers.json").then((response) => {
-    console.log(response);
     return response.json();
   });
 
@@ -11,23 +9,24 @@ async function getPhotographers() {
   };
 }
 
-// Afficher les données a l'écran à partir des données importées (photographers)
+// Affichage à partir des données importées (photographers)
 async function displayData(photographers) {
-  //section html regroupant les cards
-  const photographersSection = document.querySelector(".photographer_section");
-  photographers.photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer, "userCard");
 
+  const photographersSection = document.querySelector(".photographer_section");
+
+  //Ajout de chaque vignette des photographes au HTML
+  photographers.photographers.forEach((photographer) => {
+    // Création des vignettes via la factory
+    const photographerModel = photographerFactory(photographer, "userCard");
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
 }
 
 async function init() {
-  // Récupère les datas des photographes
+  // Attente des données du JSON pour l'affichage
   const { photographers } = await getPhotographers();
   displayData(photographers);
-  console.log(photographers);
 }
 
 init();

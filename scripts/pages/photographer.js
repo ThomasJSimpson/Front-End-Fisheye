@@ -3,7 +3,6 @@ async function getPhotographers() {
   // Penser à remplacer par les données récupérées dans le json
 
   let photographers = await fetch("./data/photographers.json").then((response) => {
-    console.log(response);
     return response.json();
   });
 
@@ -11,13 +10,13 @@ async function getPhotographers() {
     photographers,
   };
 }
+
 // Récupère l'ID du photographe injecté dans l'URL
 const params = new URLSearchParams(window.location.search);
 const idPhotographer = params.get("id");
 
 // Afficher les données a l'écran à partir des données importées (photographers)
 async function displayData(photographers) {
-  //section html regroupant les cards
   const photographerHeader = document.querySelector(".photograph-header");
 
   photographers.photographers.forEach((photographer) => {
@@ -78,36 +77,26 @@ function sortMedias(medias, type) {
     return medias;
   }
 }
+
 let mediasToSort = [];
 let mediasSorted;
 const photographerMedia = document.querySelector(".photograph-media__articles");
 
-async function displayMedia(photographers, type) {
-  //section html regroupant les cards
-  let sortType = type;
-
+async function displayMedia(photographers) {
+  // Ajout de tous les médias du photographe dans un tableau à partir de l'ID
   photographers.media.forEach((media) => {
     if (media.photographerId.toString() === idPhotographer) {
       mediasToSort.push(media);
     }
   });
+  // Ajout des médias triés par popularité par défaut
+  mediasSorted = sortMedias(mediasToSort, "likes");
 
-  if (sortType === "title") {
-    mediasSorted = sortMedias(mediasToSort, "title");
-  }
-  if (sortType === "likes") {
-    mediasSorted = sortMedias(mediasToSort, "likes");
-  }
-  if (sortType === "date") {
-    mediasSorted = sortMedias(mediasToSort, "date");
-  }
-
-  // Affichage image ou video
+  // Affichage des médias au HTML
   mediasSorted.forEach((media) => {
     if (!media.video) {
       const photographerModel = mediaFactory(media, "image");
       const userMediaDom = photographerModel.getUserImageDOM();
-
       photographerMedia.appendChild(userMediaDom);
     } else if (!media.image) {
       const photographerModel = mediaFactory(media, "video");
@@ -118,10 +107,12 @@ async function displayMedia(photographers, type) {
 }
 
 // Tri ordre medias
-function switchSort() {
-  function titleSort() {
+function sort(type) {
+  /* function titleSort() {
     const photographerMedia = document.querySelector(".photograph-media__articles");
     photographerMedia.innerHTML = "";
+
+
     mediasSorted = sortMedias(mediasToSort, "title");
     mediasSorted.forEach((media) => {
       if (!media.video) {
@@ -156,7 +147,6 @@ function switchSort() {
   function dateSort() {
     const photographerMedia = document.querySelector(".photograph-media__articles");
     photographerMedia.innerHTML = "";
-    console.log(mediasToSort);
     mediasSorted = sortMedias(mediasToSort, "date");
     mediasSorted.forEach((media) => {
       if (!media.video) {
@@ -169,53 +159,46 @@ function switchSort() {
         photographerMedia.appendChild(userMediaDom);
       }
     });
+  } */
+
+  const photographerMedia = document.querySelector(".photograph-media__articles");
+  photographerMedia.innerHTML = "";
+
+  if (type === "title") {
+    mediasSorted = sortMedias(mediasToSort, "title");
+  } else if (type === "like") {
+    mediasSorted = sortMedias(mediasToSort, "likes");
+  } else if (type === "date") {
+    mediasSorted = sortMedias(mediasToSort, "date");
   }
 
-  return { titleSort, likesSort, dateSort };
-}
-
-//Retour Index
-/* function backIndex() {
-  const logo = document.querySelector(".logo");
-
-  logo.addEventListener("click", function () {
-    // A adapter
-    let url = new URL("http://127.0.0.1:5500/index.html");
-// http://127.0.0.1:5500/index.html
-    window.location = url;
-  });
-} */
-
-async function likesCounter() {
-  let likes = [];
   mediasSorted.forEach((media) => {
-    likes.push(media.likes);
+    if (!media.video) {
+      const photographerModel = mediaFactory(media, "image");
+      const userMediaDom = photographerModel.getUserImageDOM();
+      photographerMedia.appendChild(userMediaDom);
+    } else if (!media.image) {
+      const photographerModel = mediaFactory(media, "video");
+      const userMediaDom = photographerModel.getUserVideoDOM();
+      photographerMedia.appendChild(userMediaDom);
+    }
   });
-  likes = likes.reduce((acc, cur) => acc + cur, 0).toString();
 
-  document.querySelector("#likesTotal").innerHTML = ` <div class = "likesCounter" ><p id ="likes">${likes}</p> <img  src="assets/images/heart_black.svg" alt=""></div> <p>${mediasSorted[0].price}€ / jour</p>`;
-}
-
-//Ajouter Likes
-function addLike() {
-  if (event.target.getAttribute("data-like") != "true") {
-    event.target.previousSibling.innerText = (Number(event.target.previousSibling.innerText) + 1).toString();
-    document.querySelector("#likes").innerText = (Number(document.querySelector("#likes").innerText) + 1).toString();
-    event.target.setAttribute("data-like", true);
-  }
-}
-
-function addLikeClick() {
   addLike();
+  likesCounter();
+  initLightbox();
+
+
+  /* if (type === "title") {
+    return titleSort();
+  } else if (type === "like") {
+    return likesSort();
+  } else if (type === "date") {
+    return dateSort();
+  } */
 }
 
-function addLikeKey() {
-  if (event.key === "Enter") {
-    addLike();
-  }
-}
-
-function initSort() {
+function displaySort() {
   document.querySelector(".photograph-media__sort--filterSimple").addEventListener("click", function (e) {
     if (e.target.firstElementChild.innerText === "Popularité") {
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
@@ -223,130 +206,147 @@ function initSort() {
       document.querySelector(".topSort").innerHTML = `<p>Popularité</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
       document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Date</p>`;
       document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
-
-      /* 
-  const topSort = document.createElement("div");
-  topSort.classList.add("topSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
-  document.querySelector(".topSort").innerHTML = `<p>Popularité</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
-  const midSort = document.createElement("div");
-  midSort.classList.add("midSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
-  document.querySelector(".midSort").innerHTML = `<p>Date</p>`;
-  const lowSort = document.createElement("div");
-  lowSort.classList.add("lowSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
-  document.querySelector(".lowSort").innerHTML = `<p>Titre</p>`; */
     } else if (e.target.firstElementChild.innerText === "Date") {
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
       document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
       document.querySelector(".topSort").innerHTML = `<p>Date</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
       document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
       document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
-      /* document.querySelector(".photograph-media__sort--filterSimple").innerHTML = "";
-  document.querySelector(".photograph-media__sort--filterSimple").className = "photograph-media__sort--filterTriple";
-  const topSort = document.createElement("div");
-  topSort.classList.add("topSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
-  document.querySelector(".topSort").innerHTML = `<p>Date</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
-  const midSort = document.createElement("div");
-  midSort.classList.add("midSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
-  document.querySelector(".midSort").innerHTML = `<p>Popularité</p>`;
-  const lowSort = document.createElement("div");
-  lowSort.classList.add("lowSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
-  document.querySelector(".lowSort").innerHTML = `<p>Titre</p>`; */
     } else if (e.target.firstElementChild.innerText === "Titre") {
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
       document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
       document.querySelector(".topSort").innerHTML = `<p>Titre</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
       document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
       document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Date</p>`;
-      /* document.querySelector(".photograph-media__sort--filterSimple").innerHTML = "";
-  document.querySelector(".photograph-media__sort--filterSimple").className = "photograph-media__sort--filterTriple";
-  const topSort = document.createElement("div");
-  topSort.classList.add("topSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(topSort);
-  document.querySelector(".topSort").innerHTML = `<p>Titre</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="arrow_up" />`;
-  const midSort = document.createElement("div");
-  midSort.classList.add("midSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(midSort);
-  document.querySelector(".midSort").innerHTML = `<p>Date</p>`;
-  const lowSort = document.createElement("div");
-  lowSort.classList.add("lowSort");
-  document.querySelector(".photograph-media__sort--filterTriple").appendChild(lowSort);
-  document.querySelector(".lowSort").innerHTML = `<p>Popularité</p>`; */
     }
-    sortEL();
+    sortEl();
   });
 }
-
-async function init() {
-  // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
-  displayData(photographers);
-  displayMedia(photographers, "likes");
-  likesCounter();
-  initSort();
-  /* switchSort(); */
-}
-
-init();
-
-console.log();
-
-function sortEL() {
-  document.querySelector(".topSort").addEventListener("click", function (e) {
-    /* document.querySelector(".photograph-media__sort--filterTriple").classList.add("photograph-media__sort--filterSimple");
-  document.querySelector(".photograph-media__sort--filterTriple").classList.remove("photograph-media__sort--filteTriple");
-  document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `<p>Popularité</p>
-  <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />`;
-
- */
+function sortEl() {
+  document.querySelector(".topSort").addEventListener("click", function () {
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
   });
 
   document.querySelector(".midSort").addEventListener("click", function (e) {
-    console.log(e.target.firstElementChild.innerText);
     if (e.target.firstElementChild.innerText === "Popularité") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
-      switchSort().likesSort();
+      sort("like");
     } else if (e.target.firstElementChild.innerText === "Date") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
-      switchSort().dateSort();
+      sort("date");
     } else if (e.target.firstElementChild.innerText === "Titre") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
-      switchSort().titleSort();
+      sort("title");
     }
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
   });
 
   document.querySelector(".lowSort").addEventListener("click", function (e) {
-    console.log(e.target.firstElementChild.innerText);
     if (e.target.firstElementChild.innerText === "Popularité") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
-      switchSort().likesSort();
+      sort("like");
     } else if (e.target.firstElementChild.innerText === "Date") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
-      switchSort().dateSort();
+      sort("date");
     } else if (e.target.firstElementChild.innerText === "Titre") {
       document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
-      switchSort().titleSort();
+      sort("title");
     }
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
   });
 }
 
-// Execute a function when the user releases a key on the keyboard
-function enterTest() {
-  // Number 13 is the "Enter" key on the keyboard
+// Compteur de likes total
+function likesCounter() {
+  let likes = [];
+  mediasSorted.forEach((media) => {
+    likes.push(media.likes);
+  });
 
-  // Cancel the default action, if needed
+  likes = likes.reduce((acc, cur) => acc + cur, 0).toString();
 
-  // Trigger the button element with a click
-  console.log("YESSS");
+  document.querySelector("#likesTotal").innerHTML = ` <div class = "likesCounter" ><p id ="likes">${likes}</p> <img  src="assets/images/heart_black.svg" alt=""></div> <p>${mediasSorted[0].price}€ / jour</p>`;
 }
+
+//Ajouter Likes
+
+function addLike() {
+  document.querySelectorAll(".heart").forEach((element) =>
+    element.addEventListener("click", function (e) {
+      if (e.target.getAttribute("data-like") != "true") {
+        e.target.previousSibling.innerText = (Number(e.target.previousSibling.innerText) + 1).toString();
+        document.querySelector("#likes").innerText = (Number(document.querySelector("#likes").innerText) + 1).toString();
+        e.target.setAttribute("data-like", true);
+      }
+    })
+  );
+
+  document.querySelectorAll(".heart").forEach((element) =>
+    element.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        if (e.target.getAttribute("data-like") != "true") {
+          e.target.previousSibling.innerText = (Number(e.target.previousSibling.innerText) + 1).toString();
+          document.querySelector("#likes").innerText = (Number(document.querySelector("#likes").innerText) + 1).toString();
+          e.target.setAttribute("data-like", true);
+        }
+      }
+    })
+  );
+}
+
+let idMediaLightbox;
+let indexMediaLightbox;
+
+function displayLightbox(e) {
+  document.querySelector(".lightbox").style.display = "flex";
+  document.querySelector(".lightbox").style.zIndex = "3";
+  document.querySelector("body").style.overflow = "hidden";
+  document.querySelector(".lightbox").setAttribute("aria-hidden", false);
+  document.getElementById("main").setAttribute("aria-hidden", true);
+  document.querySelector("header").setAttribute("aria-hidden", true);
+  document.querySelector("header").style.display = "none";
+  document.getElementById("main").style.display = "none";
+
+  idMediaLightbox = e.target.getAttribute("data-id");
+  mediasSorted.forEach((element) => {
+    if (element.id.toString() === idMediaLightbox.toString()) {
+      indexMediaLightbox = mediasSorted.indexOf(element);
+
+      if (!element.video) {
+        document.querySelector(".lightbox__container--media").innerHTML = `<figure role="figure" aria-label="${e.target.getAttribute("data-title")}"><img src="${e.target.getAttribute("src")}" data-id ="${e.target.getAttribute("data-id")}" data-title="${e.target.getAttribute("data-title")}" alt="${e.target.getAttribute("data-title")}" /> <figcaption></figcaption></figure>`;
+      } else if (!element.image) {
+        document.querySelector(".lightbox__container--media").innerHTML = `<figure role="figure" aria-label="${e.target.getAttribute("data-title")}"><video data-id ="${e.target.getAttribute("data-id")}" class="media-video" controls="controls" data-title="${e.target.getAttribute("data-title")}" alt="${e.target.getAttribute("data-title")}"> <source src="${e.target.getAttribute(
+          "src"
+        )}" type="video/mp4"> </video> <figcaption></figcaption></figure>`;
+      }
+      document.querySelector(".lightbox__container--title").innerHTML = `${e.target.getAttribute("data-title")}`;
+    }
+  });
+}
+
+function initLightbox() {
+  document.querySelectorAll(".media-img, .media-video").forEach((element) => element.addEventListener("click", displayLightbox));
+  document.querySelectorAll(".media-img, .media-video").forEach((element) =>
+    element.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        displayLightbox(e);
+      }
+    })
+  );
+}
+
+async function init() {
+  // Récupère les datas des photographes
+  const { photographers } = await getPhotographers();
+  displayData(photographers);
+  displayMedia(photographers);
+  likesCounter();
+  displaySort();
+  addLike();
+  initLightbox();
+}
+
+init();

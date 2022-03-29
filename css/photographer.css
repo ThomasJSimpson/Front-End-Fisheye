@@ -338,18 +338,20 @@ button {
 }
 
 .modal header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90px;
   justify-content: space-between;
   width: 100%;
   height: fit-content;
 }
-.modal header button{
+
+.modal header button {
   cursor: pointer;
   align-self: flex-start;
   margin-top: 20px;
   background-color: #db8876;
-}
-.modal header button img {
-  
 }
 
 .modal header h1 {

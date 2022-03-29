@@ -1,47 +1,5 @@
-let idMediaLightbox;
-let indexMediaLightbox;
 
-function displayLightbox() {
-  console.log();
 
-  document.querySelector(".lightbox").style.display = "flex";
-  document.querySelector(".lightbox").style.zIndex = "3";
-  document.querySelector("body").style.overflow = "hidden";
-  document.querySelector(".lightbox").setAttribute("aria-hidden", false);
-  document.getElementById("main").setAttribute("aria-hidden", true);
-
-  document.querySelector("header").setAttribute("aria-hidden", true);
-  document.querySelector("header").style.display = "none";
-
-  document.getElementById("main").style.display = "none";
-
-  idMediaLightbox = event.target.getAttribute("data-id");
-  mediasSorted.forEach((element) => {
-    if (element.id.toString() === idMediaLightbox.toString()) {
-      indexMediaLightbox = mediasSorted.indexOf(element);
-
-      if (!element.video) {
-        document.querySelector(".lightbox__container--media").innerHTML = `<figure role="figure" aria-label="${event.target.getAttribute("data-title")}"><img src="${event.target.getAttribute("src")}" data-id ="${event.target.getAttribute("data-id")}" data-title="${event.target.getAttribute("data-title")}" alt="${event.target.getAttribute("data-title")}" /> <figcaption></figcaption></figure>`;
-      } else if (!element.image) {
-        document.querySelector(".lightbox__container--media").innerHTML = `<figure role="figure" aria-label="${event.target.getAttribute("data-title")}"><video data-id ="${event.target.getAttribute("data-id")}" class="media-video" controls="controls" data-title="${event.target.getAttribute("data-title")}" alt="${event.target.getAttribute("data-title")}"> <source src="${event.target.getAttribute(
-          "src"
-        )}" type="video/mp4"> </video> <figcaption></figcaption></figure>`;
-      }
-      document.querySelector(".lightbox__container--title").innerHTML = `${event.target.getAttribute("data-title")}`;
-    }
-  });
-  document.querySelector(".lightbox__close").focus();
-}
-
-function displayLightboxClick() {
-  displayLightbox();
-}
-
-function displayLightboxKey() {
-  if (event.key === "Enter") {
-    displayLightbox();
-  }
-}
 
 function nextLightbox() {
   for (element of mediasSorted) {
@@ -144,15 +102,5 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
-/* 
-function escapeModal(e) {
-  if (e.key === "Escape" && document.querySelector(".lightbox").style.display === "flex") {
-    closeLightbox();
-  }
-} */
-document.addEventListener("keydown", function (e) {
-  if (e.key === "Tab" && document.querySelector(".lightbox").style.display === "flex" && document.activeElement.classList.contains("lightbox__next")) {
-    console.log(document.activeElement);
-    console.log(event.charCode);
-  }
-});
+
+

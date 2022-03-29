@@ -1,8 +1,9 @@
-//
+// Fonction Factory
 function photographerFactory(data, type) {
   const { name, id, portrait, city, country, tagline, price } = data;
   const picture = `assets/images/Sample Photos/Photographers ID Photos/${portrait}`;
-  //fonction de création de l'article card
+
+  //fonction de création des vignettes de la page d'accueil
   function getUserCardDOM() {
     const link = document.createElement("a");
     const source = `photographer.html?id=${id}`;
@@ -26,18 +27,10 @@ function photographerFactory(data, type) {
     priceTxt.classList.add("price");
     priceTxt.textContent = `${price}€/jour`;
 
-    {
-      /* <figure role="group" aria-label="L’épopée d’une couleur, Maryla U. – Espace de couleur sRGB">
-    <img src="/paris-web-2017-epopee-couleur-espace-srgb.jpg" alt="L’épopée d’une couleur, Maryla U." width="720" height="322">
-    <figcaption>L’épopée d’une couleur, Maryla U. – Espace de couleur sRGB</figcaption>
-</figure> */
-    }
     link.appendChild(article);
-
     article.appendChild(figure);
     figure.appendChild(img);
     figure.appendChild(figcaption);
-
     article.appendChild(h2);
     article.appendChild(locationTxt);
     article.appendChild(taglineTxt);
@@ -46,10 +39,10 @@ function photographerFactory(data, type) {
     return link;
   }
 
+  //fonction de création de la vignette de la page de profil
+
   function getUserHeaderDOM() {
     const article = document.createElement("article");
-    /*     article.setAttribute("tabindex", "-1");
-     */
     const figure = document.createElement("figure");
     figure.setAttribute("role", "figure");
     figure.setAttribute("aria-label", name);
@@ -57,20 +50,16 @@ function photographerFactory(data, type) {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("alt", name);
-
     const textPhotograph = document.createElement("div");
     textPhotograph.classList.add("textPhotograph");
     const h1 = document.createElement("h1");
     h1.textContent = name;
-
     const locationTxt = document.createElement("p");
     locationTxt.classList.add("location_header");
     locationTxt.textContent = `${city}/${country}`;
-
     const taglineTxt = document.createElement("p");
     taglineTxt.classList.add("tagline_header");
     taglineTxt.textContent = tagline;
-
     const contactPhotograph = document.createElement("div");
     contactPhotograph.classList.add("contactPhotograph");
     const contactButton = document.createElement("button");
@@ -94,7 +83,7 @@ function photographerFactory(data, type) {
 
     return article;
   }
-
+  // Condition du type de l'objet retourné
   if (type === "userCard") {
     return { name, picture, id, getUserCardDOM };
   } else if (type === "userHeader") {
@@ -104,12 +93,10 @@ function photographerFactory(data, type) {
 
 function mediaFactory(data, type) {
   const { id, photographerId, title, image, video, likes } = data;
-
   const picture = `assets/images/Sample Photos/${image}`;
   const videoSample = `assets/images/Sample Photos/${video}`;
 
-  //fonction de création de l'article card
-
+  //Création d'une vignette d'image
   function getUserImageDOM() {
     const article = document.createElement("article");
     const figure = document.createElement("figure");
@@ -118,20 +105,12 @@ function mediaFactory(data, type) {
     const figcaption = document.createElement("figcaption");
 
     const img = document.createElement("img");
-
     img.setAttribute("src", picture);
-
     img.setAttribute("data-id", id);
-
     img.setAttribute("data-title", title);
     img.setAttribute("alt", title);
     img.classList.add("media-img");
-    /*     img.setAttribute("onclick", "displayLightbox()");
-     */
     img.setAttribute("tabindex", "2");
-    img.setAttribute("onclick", "displayLightboxClick()");
-    img.setAttribute("onkeypress", "displayLightboxKey()");
-
     const textMedia = document.createElement("div");
     const titleTxt = document.createElement("p");
     titleTxt.classList.add("titleTxt");
@@ -145,12 +124,7 @@ function mediaFactory(data, type) {
     heart.setAttribute("src", "assets/images/heart_red.svg");
     heart.classList.add("heart");
     heart.setAttribute("tabindex", "2");
-
-    heart.setAttribute("onclick", "addLikeClick()");
-    heart.setAttribute("onkeypress", "addLikeKey()");
-
     heart.setAttribute("aria-label", "Likes");
-    //heart.setAttribute("data-like", false);
 
     article.appendChild(figure);
     figure.appendChild(img);
@@ -163,6 +137,12 @@ function mediaFactory(data, type) {
     return article;
   }
 
+
+
+
+  
+  //Création d'une vignette vidéo
+  
   function getUserVideoDOM() {
     const article = document.createElement("article");
 
@@ -170,17 +150,16 @@ function mediaFactory(data, type) {
     figure.setAttribute("role", "figure");
     figure.setAttribute("aria-label", title);
     const figcaption = document.createElement("figcaption");
-    const videoTest = document.createElement("video");
-    videoTest.setAttribute("data-id", id);
-
-    videoTest.setAttribute("data-title", title);
-    videoTest.setAttribute("alt", title);
-    videoTest.setAttribute("src", videoSample);
-    videoTest.classList.add("media-video");
-    videoTest.setAttribute("onclick", "displayLightboxClick()");
-    videoTest.setAttribute("tabindex", "2");
-
-    videoTest.setAttribute("onkeypress", "displayLightboxKey()");
+    
+    const videoFile = document.createElement("video");
+    videoFile.setAttribute("data-id", id);
+    videoFile.setAttribute("data-title", title);
+    videoFile.setAttribute("alt", title);
+    videoFile.setAttribute("src", videoSample);
+    videoFile.classList.add("media-video");
+    videoFile.setAttribute("tabindex", "2");
+    /* videoFile.setAttribute("onkeypress", "displayLightboxKey()");
+    videoFile.setAttribute("onclick", "displayLightboxClick()"); */
 
     const textMedia = document.createElement("div");
     const titleTxt = document.createElement("p");
@@ -193,15 +172,12 @@ function mediaFactory(data, type) {
 
     const heart = document.createElement("img");
     heart.setAttribute("src", "assets/images/heart_red.svg");
-    heart.setAttribute("tabindex", "2");
     heart.classList.add("heart");
     heart.setAttribute("tabindex", "2");
-    heart.setAttribute("onclick", "addLikeClick()");
-    heart.setAttribute("onkeypress", "addLikeKey()");
     heart.setAttribute("aria-label", "Likes");
 
     article.appendChild(figure);
-    figure.appendChild(videoTest);
+    figure.appendChild(videoFile);
     figure.appendChild(figcaption);
     article.appendChild(textMedia);
     textMedia.appendChild(titleTxt);

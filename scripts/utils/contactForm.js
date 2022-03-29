@@ -11,9 +11,8 @@ function displayModal() {
 
   document.getElementById("contactName").innerHTML = `
   <h1>Contactez-moi <br> ${photographerName} </h1>
-  <button tabindex="1" type="button" onkeypress="closeModalKey()" onclick="closeModalClick()"><img  src="assets/icons/close.svg" alt="Close Contact form"  /></button>
-
   `;
+
   document.getElementById("main").setAttribute("aria-hidden", true);
   document.querySelector("header").setAttribute("aria-hidden", true);
   document.querySelector(".modal").setAttribute("aria-labelledby", `Contactez-moi,${photographerName}`);
@@ -33,19 +32,7 @@ function closeModal() {
   document.querySelector("header").setAttribute("aria-hidden", false);
 }
 
-function closeModalClick() {
-  closeModal();
-}
-function closeModalKey(e) {
-  if (e.key === "Enter" && document.getElementById("contact_modal").style.display === "block") {
-    closeModal();
-  }
-}
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  let textModal = `Prénom: ${inputFirst.value}, Nom: ${inputLast.value}, Email: ${inputEmail.value}, Message: ${inputMessage.value}`;
-  console.log(textModal);
+document.getElementById("closeButton").addEventListener("click", function () {
   closeModal();
 });
 
@@ -53,4 +40,11 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && document.getElementById("contact_modal").style.display === "block") {
     closeModal();
   }
+});
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  let textModal = `Prénom: ${inputFirst.value}, Nom: ${inputLast.value}, Email: ${inputEmail.value}, Message: ${inputMessage.value}`;
+  console.log(textModal);
+  closeModal();
 });

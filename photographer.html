@@ -19,7 +19,7 @@
         <div class="photograph-media__sort disable-select">
           <p>Trier par</p>
 
-          <button tabindex="2" class="photograph-media__sort--filterSimple">
+          <button role= "button" aria-haspopup="listbox" aria-expanded  tabindex="2" class="photograph-media__sort--filterSimple">
             <p>Popularité</p>
             <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
           </button>
@@ -42,7 +42,7 @@
     </main>
     <div id="contact_modal" aria-hidden="true">
       <div role="dialog" class="modal">
-        <header id="contactName"></header>
+        <header> <div id="contactName"></div><button id="closeButton" tabindex="1" type="button"><img  src="assets/icons/close.svg" alt="Close Contact form"  /></button></header>
         <form name="form" method="get" style="display: block">
           <div>
             <label for="first">Prénom</label>
