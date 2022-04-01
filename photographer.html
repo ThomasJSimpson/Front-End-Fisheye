@@ -18,24 +18,17 @@
       <section class="photograph-media">
         <div class="photograph-media__sort disable-select">
           <div id="sortLabel">
-          <p>Trier par</p>
-
+            <p>Trier par</p>
           </div>
 
-          <button role="listbox" aria-haspopup="listbox" aria-expanded="false" tabindex="2" class="photograph-media__sort--filterSimple">
-            <p>Popularité</p>
-            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />
-          </button>
+          <button role="button" aria-haspopup="listbox" aria-expanded="false" tabindex="2" class="photograph-media__sort--filterSimple">Popularité<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" /></button>
 
           <div role="listbox" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="sortLabel" class="photograph-media__sort--filterTriple">
-            <button  role="option" tabindex="2" class="topSort" aria-selected="true">
-              <p></p>
-              <img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />
-            </button>
+            <button role="option" tabindex="2" class="topSort" aria-selected="true"></button>
             <button class="midSort" role="option" tabindex="2" aria-selected="false">
-              <div><p></p></div>
+              
             </button>
-            <button role="option" tabindex="2" class="lowSort" aria-selected="false"><p></p></button>
+            <button role="option" tabindex="2" class="lowSort" aria-selected="false"></button>
           </div>
         </div>
         <div class="photograph-media__articles"></div>
@@ -66,7 +59,7 @@
           <div>
             <label for="inputMessage">Votre message</label>
 
-            <textarea type="text" title="Your message" id="inputMessage"></textarea>
+            <textarea title="Your message" id="inputMessage"></textarea>
           </div>
           <button tabindex="1" class="button send_button" title="Confirmer l'envoi de votre message" aria-label="Send, confirmer l'envoi de mon message">Envoyer</button>
         </form>

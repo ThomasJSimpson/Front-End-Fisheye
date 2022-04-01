@@ -140,21 +140,27 @@ function displaySort() {
   document.querySelector(".photograph-media__sort--filterSimple").addEventListener("click", function (e) {
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
-    if (e.target.firstElementChild.innerText === "Popularité") {
-      document.querySelector(".topSort").innerHTML = `<p>Popularité</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
-      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Date</p>`;
-      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
-    } else if (e.target.firstElementChild.innerText === "Date") {
-      document.querySelector(".topSort").innerHTML = `<p>Date</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
-      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
-      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Titre</p>`;
-    } else if (e.target.firstElementChild.innerText === "Titre") {
-      document.querySelector(".topSort").innerHTML = `<p>Titre</p> <img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
-      document.querySelector(".midSort").firstElementChild.innerHTML = `<p>Popularité</p>`;
-      document.querySelector(".lowSort").firstElementChild.innerHTML = `<p>Date</p>`;
+    console.log(e.target.innerText);
+    if (e.target.innerText === "Popularité") {
+      console.log("ok pop");
+
+      document.querySelector(".topSort").innerHTML = `Popularité<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
+      document.querySelector(".midSort").innerText = `Date`;
+      document.querySelector(".lowSort").innerText = `Titre`;
+    } else if (e.target.innerText === "Date") {
+      console.log("ok date");
+
+      document.querySelector(".topSort").innerHTML = `Date<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
+      document.querySelector(".midSort").innerText = `Popularité`;
+      document.querySelector(".lowSort").innerText = `Titre`;
+    } else if (e.target.innerText === "Titre") {
+      console.log("ok titre");
+
+      document.querySelector(".topSort").innerHTML = `Titre<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
+      document.querySelector(".midSort").innerText = `Popularité`;
+      document.querySelector(".lowSort").innerText = `Date`;
     }
     document.querySelector(".topSort").focus();
-
     document.querySelector(".topSort").addEventListener("click", function () {
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
       document.querySelector(".photograph-media__sort--filterTriple").style.display = "none";
@@ -162,14 +168,14 @@ function displaySort() {
     });
 
     document.querySelector(".midSort").addEventListener("click", function (e) {
-      if (e.target.firstElementChild.innerText === "Popularité") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      if (e.target.innerText === "Popularité") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Popularité<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("like");
-      } else if (e.target.firstElementChild.innerText === "Date") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
+      } else if (e.target.innerText === "Date") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Date<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("date");
-      } else if (e.target.firstElementChild.innerText === "Titre") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
+      } else if (e.target.innerText === "Titre") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Titre<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("title");
       }
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";
@@ -178,14 +184,14 @@ function displaySort() {
     });
 
     document.querySelector(".lowSort").addEventListener("click", function (e) {
-      if (e.target.firstElementChild.innerText === "Popularité") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Popularité</p>`;
+      if (e.target.innerText === "Popularité") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Popularité<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("like");
-      } else if (e.target.firstElementChild.innerText === "Date") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Date</p>`;
+      } else if (e.target.innerText === "Date") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Date<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("date");
-      } else if (e.target.firstElementChild.innerText === "Titre") {
-        document.querySelector(".photograph-media__sort--filterSimple").firstElementChild.innerHTML = `<p>Titre</p>`;
+      } else if (e.target.innerText === "Titre") {
+        document.querySelector(".photograph-media__sort--filterSimple").innerHTML = `Titre<img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />`;
         sort("title");
       }
       document.querySelector(".photograph-media__sort--filterSimple").style.display = "flex";

@@ -131,9 +131,7 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 23px;
-
   color: #000000;
-
   margin-top: 11px;
   margin-right: 25px;
 }
@@ -149,9 +147,6 @@
   background: #911c1c;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.photograph-media__sort--filterSimple p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -160,7 +155,8 @@
   line-height: 23px;
   align-self: center;
   color: #ffffff;
-  pointer-events: none;
+  /*   pointer-events: none;
+ */
 }
 
 .photograph-media__sort--filterTriple {
@@ -176,7 +172,7 @@
   z-index: 1;
 }
 
-.photograph-media__sort--filterTriple p {
+/* .photograph-media__sort--filterTriple p {
   font-family: DM Sans;
   font-style: normal;
   font-weight: bold;
@@ -185,7 +181,7 @@
   line-height: 23px;
   color: #ffffff;
   pointer-events: none;
-}
+} */
 
 .arrow_down,
 .arrow_up {
@@ -205,25 +201,49 @@
   padding: 23px 18px 14px 20px;
   background: #911c1c;
   border-radius: 5px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  margin: 0;
+  font-size: 18px;
+  line-height: 23px;
+  align-self: center;
+  color: #ffffff;
 }
 
 .midSort {
   display: flex;
-  width: 100%;
-  justify-content: center;
+  width: 150px;
   align-self: center;
   align-items: center;
   background: #911c1c;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  padding-left: 10px;
+  height: 57px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  margin: 0;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ffffff;
 }
 .midSort div {
   display: flex;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  width: 150px;
-
   align-items: center;
   padding-left: 10px;
   height: 57px;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  margin: 0;
+  font-size: 18px;
+  line-height: 23px;
+  align-self: center;
+  color: #ffffff;
 }
 
 .lowSort {
@@ -234,6 +254,14 @@
   align-items: center;
   padding-left: 20px;
   background: #911c1c;
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  margin: 0;
+  font-size: 18px;
+  line-height: 23px;
+  align-self: center;
+  color: #ffffff;
 }
 
 .photograph-media__articles {
