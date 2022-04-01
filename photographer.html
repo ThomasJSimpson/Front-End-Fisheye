@@ -17,23 +17,27 @@
       <div class="photograph-header"></div>
       <section class="photograph-media">
         <div class="photograph-media__sort disable-select">
+          <div id="sortLabel">
           <p>Trier par</p>
 
-          <button role= "button" aria-haspopup="listbox" aria-expanded  tabindex="2" class="photograph-media__sort--filterSimple">
+          </div>
+
+          <button role="listbox" aria-haspopup="listbox" aria-expanded="false" tabindex="2" class="photograph-media__sort--filterSimple">
             <p>Popularité</p>
-            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+            <img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />
           </button>
 
-          <div class="photograph-media__sort--filterTriple">
-            <button tabindex="2" class="topSort">
+          <div role="listbox" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="sortLabel" class="photograph-media__sort--filterTriple">
+            <button  role="option" tabindex="2" class="topSort" aria-selected="true">
               <p></p>
-              <img class="arrow_down" src="assets/images/arrow_down.svg" alt="arrow_down" />
+              <img class="arrow_down" src="assets/images/arrow_down.svg" alt="icon arrow down" />
             </button>
-            <button tabindex="2" class="midSort"><p></p></button>
-            <button tabindex="2" class="lowSort"><p></p></button>
+            <button class="midSort" role="option" tabindex="2" aria-selected="false">
+              <div><p></p></div>
+            </button>
+            <button role="option" tabindex="2" class="lowSort" aria-selected="false"><p></p></button>
           </div>
         </div>
-
         <div class="photograph-media__articles"></div>
         <div class="likeSpace"></div>
       </section>
@@ -42,7 +46,10 @@
     </main>
     <div id="contact_modal" aria-hidden="true">
       <div role="dialog" class="modal">
-        <header> <div id="contactName"></div><button id="closeButton" tabindex="1" type="button"><img  src="assets/icons/close.svg" alt="Close Contact form"  /></button></header>
+        <header>
+          <div id="contactName"></div>
+          <button id="closeButton" tabindex="1" type="button"><img src="assets/icons/close.svg" alt="Close Contact form" /></button>
+        </header>
         <form name="form" method="get" style="display: block">
           <div>
             <label for="first">Prénom</label>

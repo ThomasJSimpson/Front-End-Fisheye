@@ -11,7 +11,6 @@ async function getPhotographers() {
 
 // Affichage à partir des données importées (photographers)
 async function displayData(photographers) {
-
   const photographersSection = document.querySelector(".photographer_section");
 
   //Ajout de chaque vignette des photographes au HTML

@@ -137,12 +137,8 @@ function mediaFactory(data, type) {
     return article;
   }
 
-
-
-
-  
   //Création d'une vignette vidéo
-  
+
   function getUserVideoDOM() {
     const article = document.createElement("article");
 
@@ -150,7 +146,7 @@ function mediaFactory(data, type) {
     figure.setAttribute("role", "figure");
     figure.setAttribute("aria-label", title);
     const figcaption = document.createElement("figcaption");
-    
+
     const videoFile = document.createElement("video");
     videoFile.setAttribute("data-id", id);
     videoFile.setAttribute("data-title", title);
