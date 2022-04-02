@@ -140,21 +140,17 @@ function displaySort() {
   document.querySelector(".photograph-media__sort--filterSimple").addEventListener("click", function (e) {
     document.querySelector(".photograph-media__sort--filterSimple").style.display = "none";
     document.querySelector(".photograph-media__sort--filterTriple").style.display = "flex";
-    console.log(e.target.innerText);
     if (e.target.innerText === "Popularité") {
-      console.log("ok pop");
 
       document.querySelector(".topSort").innerHTML = `Popularité<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
       document.querySelector(".midSort").innerText = `Date`;
       document.querySelector(".lowSort").innerText = `Titre`;
     } else if (e.target.innerText === "Date") {
-      console.log("ok date");
 
       document.querySelector(".topSort").innerHTML = `Date<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
       document.querySelector(".midSort").innerText = `Popularité`;
       document.querySelector(".lowSort").innerText = `Titre`;
     } else if (e.target.innerText === "Titre") {
-      console.log("ok titre");
 
       document.querySelector(".topSort").innerHTML = `Titre<img class="arrow_up" src="assets/images/arrow_up.svg" alt="icon arrow up" />`;
       document.querySelector(".midSort").innerText = `Popularité`;
